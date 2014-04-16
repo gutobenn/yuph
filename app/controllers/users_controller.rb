@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  helper :users
+
   skip_before_filter :authenticate_user!, :only => [:new, :create, :show]
   load_and_authorize_resource
 
