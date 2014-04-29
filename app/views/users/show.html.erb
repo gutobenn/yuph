@@ -21,12 +21,25 @@
 				</div>
 				<br>
 				<div class="profile-statistics-push">
-					<%= show_non_blank_field "Local: ", @user.local %>
-					<%= show_non_blank_field "Email: ", @user.email %>
-					<%= show_non_blank_field "Website: ", @user.website %>
-					<%= show_non_blank_field "Facebook: ", @user.facebook %>
-					<%= show_non_blank_field "Twitter: ", @user.twitter %>
-					<%-# TODO falta exibir a span class bio-link e integrar com o mail_to encodado. alinhar verticalmente pro topo. ta deixando mto espaço em cima e embaixo quando o field ta vazio no codigo fonte-%>
+				 	<%  user_info = { t(".email") => mail_to(@user.email, nil, encode: "javascript"), 
+				 					  t(".local") => @user.local }
+
+						user_info.each do |k, v|
+					 		if v.present? %>
+					 			<p><%= k %>: <span class="bio-link"><%= v %></span></p>
+				 			<% end
+					 	end
+
+				 		user_info_links = { t(".website") => @user.website,
+				 							t(".facebook") => @user.facebook,
+				 							t(".twitter") => @user.twitter }
+
+					 	user_info_links.each do |k, v|
+					 		if v.present? %>
+					 			<p><%= k %>: <span class="bio-link"><%= link_to(v, v) %></span></p>
+				 			<% end
+					 	end %>
+					 	 
 				</div>
 				<div class="profile-statistics">
 					<p>

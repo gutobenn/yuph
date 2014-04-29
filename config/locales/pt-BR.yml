@@ -33,6 +33,13 @@ pt-BR:
   user:
     created: Nova conta criada, bem vindo à Yuph.
     updated: Dados da conta atualizados.
+  users:
+    show:
+      local: Local
+      email: Email
+      website: Website
+      facebook: Facebook
+      twitter: Twitter
   user_comment:
     created: O seu comentário foi criado com sucesso.
     destroyed: O seu comentário foi apagado.
