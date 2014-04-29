@@ -7,7 +7,7 @@
 			</div>
 			<div class="profile-title">
 				<h1 class="profile"><%= @user.nick %></h1>
-				<h2><%= @user.first_name %> &nbsp <%= @user.last_name %></h2>
+				<h2><%= @user.first_name %> &nbsp; <%= @user.last_name %></h2>
 			</div>
 			<div class="edit-profile">
 				<%= button_to "Editar", edit_user_path(@user),
@@ -21,11 +21,24 @@
 				</div>
 				<br>
 				<div class="profile-statistics-push">
-					<p>Local: <%= @user.local %></p>
-					<p>Email: <span class="bio-link"><%= @user.email %></span></p>
-					<p>Website: <span class="bio-link"><%= @user.website %></span></p>
-					<p>Facebook: <span class="bio-link"><%= @user.facebook %></span></p>
-					<p>Twitter: <span class="bio-link"><%= @user.twitter %></span></p>
+				 	<%
+				 	user_info = { t(".email") => mail_to(@user.email, nil, encode: "javascript"),
+				 					  t(".local") => @user.local }
+
+					user_info.each do |k, v|
+				 		if v.present? %>
+				 			<p><%= k %>: <span class="bio-link"><%= v %></span></p>
+			 			<% end
+				 	end
+
+			 		user_info_links = { t(".website") => @user.website, t(".facebook") => @user.facebook, t(".twitter") => @user.twitter }
+
+
+				 	user_info_links.each do |k, v|
+				 		if v.present? %>
+				 			<p><%= k %>: <span class="bio-link"><%= link_to(v, v) %></span></p>
+			 			<% end
+				 	end %>
 				</div>
 				<div class="profile-statistics">
 					<p>
